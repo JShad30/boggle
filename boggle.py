@@ -5,10 +5,15 @@ def make_grid(width, height):
     """
     Creates a grid that will hold all the tiles for a boggle game
     """
+    
+    #The choice method returns a random item form a list, tuple or string.
+    
     return {(row, column): choice(ascii_uppercase) 
         for row in range(height)
         for column in range(width)
     }
+    
+    #The grid has been created using a dictionary data structure in python
     
 def neighbours_of_position(coords):
     """
@@ -64,7 +69,7 @@ def search(grid, dictionary):
         word = path_to_word(grid, path)
         if word in dictionary:
             paths.append(path)
-        for next_position in neighbours[path[-1]]:
+        for next_position in neighbours[path[-1]]: #The last item in the list path is chosen when using path[-1] here.
             if next_position not in path:
                 do_search(path + [next_position])
                 
@@ -84,6 +89,11 @@ def get_dictionary(dictionary_file):
     with open(dictionary_file) as f:
         return [w.strip().upper() for w in f]
         
+#def display_words(grid, dictionary):
+    """
+    This function displays the words in the console
+    """
+        
 def main():
     """
     This is a function that runs the whole project
@@ -94,6 +104,8 @@ def main():
     for word in words:
         print(word)
     print("Found %s words" % len(words))
+
+# Following code states that main() should only be run if the name given in the console is boggle.py. Will not run when imported into the test_boggle.py.
 
 if __name__ == "__main__":
     main()

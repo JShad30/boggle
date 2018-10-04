@@ -58,6 +58,9 @@ class TestBoggle(unittest.TestCase):
         """
         Ensure that all of the grid positions have neighbours
         """
+        
+        #The self.assertEqual here tests for equality
+        
         grid = boggle.make_grid(2, 2)
         neighbours = boggle.all_grid_neighbours(grid)
         self.assertEqual(len(neighbours), len(grid))
