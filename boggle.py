@@ -58,6 +58,9 @@ def path_to_word(grid, path):
     """
     return ''.join([grid[p] for p in path])
 
+def word_in_dictionary(word, dict):
+    return word in dict
+
 def search(grid, dictionary):
     """
     Search through the paths to match the strings to words in a dictionary
@@ -67,7 +70,7 @@ def search(grid, dictionary):
     
     def do_search(path):
         word = path_to_word(grid, path)
-        if word in dictionary:
+        if word_in_dictionary(word, dictionary):
             paths.append(path)
         for next_position in neighbours[path[-1]]: #The last item in the list path is chosen when using path[-1] here.
             if next_position not in path:
@@ -87,25 +90,20 @@ def get_dictionary(dictionary_file):
     Load dictionary file
     """
     with open(dictionary_file) as f:
-        return [w.strip().upper() for w in f]
-        
-#def display_words(grid, dictionary):
-    """
-    This function displays the words in the console
-    """
-        
+        return {w.strip().upper() for w in f}
+    
 def main():
     """
     This is a function that runs the whole project
     """
-    grid = make_grid(3, 3)
-    dictionary = get_dictionary("words.txt")
+    grid = make_grid(4, 4)
+    dictionary = get_dictionary("words.txt")  
     words = search(grid, dictionary)
     for word in words:
         print(word)
     print("Found %s words" % len(words))
-
-# Following code states that main() should only be run if the name given in the console is boggle.py. Will not run when imported into the test_boggle.py.
+    
+# Following code states that main() should only be run if the name given in the console is boggle.py. Main will not run when imported into the test_boggle.py.
 
 if __name__ == "__main__":
     main()
