@@ -2,9 +2,7 @@ from string import ascii_uppercase
 from random import choice
 
 def make_grid(width, height):
-    """
-    Creates a grid that will hold all the tiles for a boggle game
-    """
+    """Creates a grid that will hold all the tiles for a boggle game"""
     
     #The choice method returns a random item form a list, tuple or string.
     
@@ -16,9 +14,7 @@ def make_grid(width, height):
     #The grid has been created using a dictionary data structure in python
     
 def neighbours_of_position(coords):
-    """
-    Get neighbours of a position
-    """
+    """Get neighbours of a position"""
     row = coords[0]
     column = coords[1]
     
@@ -43,9 +39,7 @@ def neighbours_of_position(coords):
     return [top_left, top_center, top_right, middle_left, middle_right, bottom_left, bottom_center, bottom_right]
     
 def all_grid_neighbours(grid):
-    """
-    Get all possible neighbours for all the positions in the grid
-    """
+    """Get all possible neighbours for all the positions in the grid"""
     neighbours = {}
     for position in grid:
         position_neighbours = neighbours_of_position(position)
@@ -53,18 +47,14 @@ def all_grid_neighbours(grid):
     return neighbours
 
 def path_to_word(grid, path):
-    """
-    Add all of the letters on a path to a string
-    """
+    """Add all of the letters on a path to a string"""
     return ''.join([grid[p] for p in path])
 
 def word_in_dictionary(word, dict):
     return word in dict
 
 def search(grid, dictionary):
-    """
-    Search through the paths to match the strings to words in a dictionary
-    """
+    """Search through the paths to match the strings to words in a dictionary"""
     neighbours = all_grid_neighbours(grid)
     paths = []
     
@@ -86,16 +76,12 @@ def search(grid, dictionary):
     return set(words)
     
 def get_dictionary(dictionary_file):
-    """
-    Load dictionary file
-    """
+    """Load dictionary file"""
     with open(dictionary_file) as f:
         return {w.strip().upper() for w in f}
     
 def main():
-    """
-    This is a function that runs the whole project
-    """
+    """This is a function that runs the whole project"""
     grid = make_grid(4, 4)
     dictionary = get_dictionary("words.txt")  
     words = search(grid, dictionary)
